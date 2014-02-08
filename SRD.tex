@@ -162,6 +162,7 @@
     0.6 & Audry & 20/12/13 & Section 3.3 \\
     0.7 & David & 20/12/13 & Glossaire et Index \\
     1.0 & Manon & 20/12/13 & Relecture et révision \\
+    1.1 & Hélène & 07/02/14 & Relecture et révision \\
     \hline
   \end{tabular}
 
@@ -234,7 +235,7 @@
     générées par la vente de tickets). Avant de commencer le match proprement dit,
     le Manager doit choisir sept de ses joueurs pour former son équipe. 
     Une fois le match terminé, le Manager prend connaissance du résultat du match 
-    (s'il a gagné ou perdu) et des recettes éventuellement réalisées. Le match peut être amical (démarré à la suite d'une invitation pouvant être envoyée à tout moment par un Manager à un autre Manager connecté) ou s'inscrivant dans un championnat. Les deux types de match ont pour point commun de rendre le Manager gagnant plus riche d'au moins une prime de victoire.
+    (s'il a gagné ou perdu) et des recettes éventuellement réalisées. Un match peut être amical (démarré à la suite d'une invitation pouvant être envoyée à tout moment par un Manager à un autre Manager connecté) ou s'inscrivant dans un championnat. Les deux types de match ont pour point commun de rendre le Manager gagnant plus riche d'au moins une prime de victoire.
 
     \subsubsection{Exécuter un tour}
       \begin{itemize}
@@ -314,18 +315,21 @@
         \item \textbf{Relations avec d'autres cas d'utilisation}  : Spécialise Finir le match
         \item \textbf{Pré-conditions} : Un des \gls{attrapeur}s \index{joueur!attrapeur} a repéré le \gls{vifOr}.
         \item \textbf{Post-conditions} : Si l'attrapeur réussit son coup, le match est terminé. S'il échoue, le match continue.
-        \item \textbf{Cas général} : Un des attrapeurs a repéré le vif d’or, c’est-à-dire qu’en se déplaçant sur le terrain\index{terrain}, il est arrivé suffisamment proche du vif d’or pour que sa précision permette de le repérer (et de le rendre visible pour son manager). L’attrapeur essaiera automatiquement de l’attraper (la réussite de l’action dépend des qualités de l’attrapeur et de sa distance par rapport au vif d’or). S’il réussit à l’attraper, son équipe gagne 150 points et le match est terminé.
-        \item \textbf{Cas exceptionnels} : Néant.
+        \item \textbf{Cas général} : Un des attrapeurs a repéré le vif d’or, c’est-à-dire qu’en se déplaçant sur le terrain\index{terrain}, il est arrivé suffisamment proche du vif d’or pour que sa précision permette de le repérer (et de le rendre visible pour son Manager). L’attrapeur essaiera automatiquement de l’attraper (la réussite de l’action dépend des qualités de l’attrapeur et de sa distance par rapport au vif d’or). S’il réussit à l’attraper, son équipe gagne 150 points et le match est terminé.
+        \item \textbf{Cas exceptionnels} :
+         \begin{itemize}
+            \item L'attrapeur est heurté par un cognard. Le vif d'or reste libre.
+            \end{itemize}
       \end{itemize}
     \subsubsection{Déclarer forfait}
       \begin{itemize}
         \item \textbf{Relations avec d'autres cas d'utilisation}  : Spécialise Finir match
-        \item \textbf{Pré-conditions} : Néant.
-        \item \textbf{Post-conditions} : Néant.
-        \item \textbf{Cas général} : Un des clients souhaite mettre fin au match en déclarant forfait (équivaut à une défaite 150-0, peu importe le score lorsqu’il déclare forfait).
+        \item \textbf{Pré-conditions} : L'action se déroule au cours d'un match.
+        \item \textbf{Post-conditions} : Le match est terminé. Le Manager qui n'a pas déclaré forfait a gagné.
+        \item \textbf{Cas général} : Un des Managers souhaite mettre fin au match en déclarant forfait (équivaut à une défaite 150-0, peu importe le score lorsqu’il déclare forfait).
         \item \textbf{Cas exceptionnels} :
           \begin{itemize}
-            \item Si un client se déconnecte au cours d’un match et ne se reconnecte pas dans un certain délai de temps, on considérera qu’il a déclaré forfait.
+            \item Si un Manager se déconnecte au cours d’un match et ne se reconnecte pas dans un certain délai de temps, on considérera qu’il a déclaré forfait.
           \end{itemize}
       \end{itemize}
 
@@ -346,7 +350,7 @@
         \item \textbf{Relations avec d'autres cas d'utilisation}  : Néant.
         \item \textbf{Pré-conditions} : On a sélectionné un bâtiment.
         \item \textbf{Post-conditions} : Néant.
-        \item \textbf{Cas général} : Le client souhaite savoir quel est le niveau actuel d’un certain bâtiment. 
+        \item \textbf{Cas général} : Le client souhaite savoir quel est le niveau actuel (de construction et d'amélioration) d’un certain bâtiment. 
         \item \textbf{Cas exceptionnels} : Néant.
       \end{itemize}
     \subsubsection{Voir propriétés du bâtiment}
@@ -365,16 +369,19 @@
         \item \textbf{Relations avec d'autres cas d'utilisation}  : Néant.
         \item \textbf{Pré-conditions} : On a sélectionné un bâtiment.
         \item \textbf{Post-conditions} : Néant.
-        \item \textbf{Cas général} : Le client souhaite voir quelle est la somme requise pour pouvoir lancer un projet de construction ou d’amélioration d’un certain bâtiment.
+        \item \textbf{Cas général} : Le client souhaite connaître la somme requise pour pouvoir lancer un projet de construction ou d’amélioration d’un certain bâtiment.
         \item \textbf{Cas exceptionnels} : Néant.
       \end{itemize}
     \subsubsection{Construire/Améliorer bâtiment}
       \begin{itemize}
         \item \textbf{Relations avec d'autres cas d'utilisation}  : Néant.
-        \item \textbf{Pré-conditions} : Le client doit posséder suffisamment d’argent pour payer le projet de construction ou d’amélioration. On a choisi le bâtiment qu’on veut améliorer.
+        \item \textbf{Pré-conditions} : Le Manager possède suffisamment d’argent pour payer le projet de construction ou d’amélioration. Le Manager a choisi le bâtiment qu’il désire améliorer.
         \item \textbf{Post-conditions} : Le projet sera terminé après un certain laps de temps déterminé par le niveau du bâtiment. La date de fin des travaux est sauvegardée dans un \gls{calendrier}\index{calendrier} qui sera vérifié régulièrement.
-        \item \textbf{Cas général} : Le client souhaite construire (si niveau actuel vaut 0) ou améliorer (si niveau actuel vaut 1 ou plus) un certain bâtiment et choisit donc de lancer un projet de construction/amélioration. Ce projet coûte de l’argent et prend un certain temps.
-        \item \textbf{Cas exceptionnels} : Néant.
+        \item \textbf{Cas général} : Le Manager souhaite construire (si niveau actuel vaut 0) ou améliorer (si niveau actuel vaut 1 ou plus) un certain bâtiment et choisit donc de lancer un projet de construction/amélioration. Le coût des travaux est déduit de son capital et les travaux ne sont achevés qu'après un certain temps.
+        \item \textbf{Cas exceptionnels} :
+        \begin{itemize}
+            \item Le bâtiment sélectionné est à son niveau maximum. Aucune évolution supplémentaire ne peut être effectuée sur ce bâtiment.
+          \end{itemize}
       \end{itemize}
 
   \subsection{Cas d'utilisation 4: gérer son équipe}
@@ -389,37 +396,37 @@
     \subsubsection{Inspecter joueur}
       \begin{itemize}
         \item \textbf{Relations avec d'autres cas d'utilisation}  : Inclut Sélectionner joueur
-        \item \textbf{Pré-conditions} : Néant.
+        \item \textbf{Pré-conditions} : Le Manager a sélectionné un de ses joueurs.
         \item \textbf{Post-conditions} : Néant.
-        \item \textbf{Cas général} : Le client souhaite se renseigner sur les capacités d’un de ses joueurs. Il pourra voir le niveau de chaque attribut de ses joueurs ainsi que leur popularité et leur balai.
+        \item \textbf{Cas général} : Le client souhaite se renseigner sur les capacités d’un de ses joueurs. Il pourra voir le niveau de chaque attribut du joueur ainsi que sa popularité et son balai.
 
         \item \textbf{Cas exceptionnels} : Néant.
       \end{itemize}
     \subsubsection{Assigner un balai à un joueur}
       \begin{itemize}
         \item \textbf{Relations avec d'autres cas d'utilisation}  : Inclut Sélectionner joueur et Sélectionner balai
-        \item \textbf{Pré-conditions} : Néant.
-        \item \textbf{Post-conditions} : Le balai sélectionné sera assigné au joueur. L’ancien balai est à nouveau disponible pour une assignation.
-        \item \textbf{Cas général} : Le client souhaite changer le balai d’un joueur. Les balais ont des bonus particuliers qui permettent d’augmenter certains attributs des joueurs. Le joueur possèdera un nouveau balai\index{balai}. L’ancien balai ne sera plus assigné à un joueur mais reste disponible.
+        \item \textbf{Pré-conditions} : Le Manager a sélectionné un balai disponible pour une assignation.
+        \item \textbf{Post-conditions} : Le balai sélectionné est assigné au joueur. L’ancien balai est à nouveau disponible pour une assignation.
+        \item \textbf{Cas général} : Le Manager souhaite changer le balai d’un joueur. Les balais ont des bonus particuliers qui permettent d’augmenter certains attributs des joueurs. Une fois u'un joueur s'est vu assigné un nouveau balai, l'ancien n'est plus assigné à aucun joueur mais reste disponible.
         \item \textbf{Cas exceptionnels} :
           \begin{itemize}
-            \item Le client peut retirer le balai d’un joueur sans lui en assigner un nouveau s’il ne sélectionne pas de balai à assigner.
+            \item Le Manager retire le balai d’un joueur sans lui en assigner un nouveau s’il n'a pas au préalable sélectionné de balai disponible.
           \end{itemize}
       \end{itemize}
     \subsubsection{Sélectionner joueur}
       \begin{itemize}
         \item \textbf{Relations avec d'autres cas d'utilisation}  :  Est inclus dans Inspecter joueur et Assigner un balai à un joueur
-        \item \textbf{Pré-conditions} : Néant.
-        \item \textbf{Post-conditions} : Néant.
+        \item \textbf{Pré-conditions} : Le Manager a une vue sur tous ses joueurs.
+        \item \textbf{Post-conditions} : Le Manager a accès aux caractéristiques propres au joueur sélectionné.
         \item \textbf{Cas général} : Le client choisit le joueur qu’il veut gérer (inspecter ou changer le balai).
         \item \textbf{Cas exceptionnels} : Néant.
       \end{itemize}
     \subsubsection{Sélectionner balai}
       \begin{itemize}
         \item \textbf{Relations avec d'autres cas d'utilisation}  : Est inclus dans Assigner un balai à un joueur
-        \item \textbf{Pré-conditions} : \index{balai}Le balai doit être disponible, c’est-à-dire qu’il ne doit pas déjà être assigné à un joueur.
-        \item \textbf{Post-conditions} : Néant.
-        \item \textbf{Cas général} : Le client choisit le balai qu’il va assigner à un joueur. Le balai sera assigné et ne sera plus disponible.
+        \item \textbf{Pré-conditions} : \index{balai}Le balai doit être disponible, c’est-à-dire qu’il ne doit être assigné à aucun joueur.
+        \item \textbf{Post-conditions} : Le balai disponible est sélectionné.
+        \item \textbf{Cas général} : Le client choisit le balai qu’il va assigner à un joueur. Une fois assigné, le balai ne sera plus disponible.
         \item \textbf{Cas exceptionnels} : Néant.
       \end{itemize}
 
@@ -430,32 +437,41 @@
     \caption{Cas d'utilisation 5: Magasins}
   \end{figure}
   Dans le bâtiment \enquote{\gls{centrerecrutement}} \index{bâtiment!Centre de Recrutement}, le Manager pourra "s'offrir" de nouveaux joueurs, 
-  selon ses moyens. Il peut également vendre des joueurs qu'il possède. La valeur d'un joueur est déterminée par ses capacités.
+  selon ses moyens. Il peut également vendre les joueurs qu'il possède. Les joueurs sont vendus aux enchères. Le vendeur décide du prix de vente dans une fourchette de prix (estimée d'après les capacités du joueur).
   Dans le bâtiment \enquote{\gls{magasinbalais}} \index{bâtiment!Magasin de balais}, le Manager pourra acheter ou vendre des balais.\index{balai} Outre les balais de base qui permettent juste de voler, 
   il y a aussi des balais qui octroient des bonus à certaines capacités des joueurs.
     \subsubsection{Faire des achats}
       \begin{itemize}
         \item \textbf{Relations avec d'autres cas d'utilisation}  : Généralise Acheter joueur et Acheter balai
-        \item \textbf{Pré-conditions} : Le client doit posséder suffisamment d’argent pour payer ce qu’il veut acheter.
-        \item \textbf{Post-conditions} : Le prix est retiré du solde du manager.
+        \item \textbf{Pré-conditions} : Le Manager doit posséder suffisamment d’argent pour payer ce qu’il veut acheter. Le Manager doit avoir de la place pour un joueur ou pour un balai.
+        \item \textbf{Post-conditions} : Le prix est déduit du solde du manager. L'item se trouve en la possession du Manager.
         \item \textbf{Cas général} : Le client souhaite acheter un nouveau joueur pour renforcer son équipe ou un nouveau balai pour renforcer un joueur.
         \item \textbf{Cas exceptionnels} : Néant.
       \end{itemize}
     \subsubsection{Faire des ventes}
       \begin{itemize}
         \item \textbf{Relations avec d'autres cas d'utilisation}  : Généralise Vendre joueur et Vendre balai.
-        \item \textbf{Pré-conditions} : Néant.
-        \item \textbf{Post-conditions} :  Le client reçoit l’argent de la vente.
-        \item \textbf{Cas général} : Le client souhaite vendre un joueur ou un balai s’il n’en a plus besoin ou si ses finances vont mal. \index{balai}\index{joueur}
+        \item \textbf{Pré-conditions} :
+        \begin{itemize}
+            \item Le Manager a choisit le joueur ou le balai qu'il désire vendre.
+            \item L'item que le Manager désire vendre doit être disponible. S'il s'agit d'un balai, il ne peut être assigné à un joueur lors de sa mise en vente. S'il s'agit d'un joueur, il doit être libre (non bloqué par une blessure, un entraînement ou une tournée de promotion).
+        \end{itemize}    
+        \item \textbf{Post-conditions} : Le Manager reçoit l’argent de la vente. Il ne possède plus l'item vendu. L'item devient disponible à l'achat.
+        \item \textbf{Cas général} : Le Manager souhaite vendre un joueur ou un balai s’il n’en a plus besoin ou si ses finances vont mal. \index{balai}\index{joueur}
         \item \textbf{Cas exceptionnels} : Néant.
       \end{itemize}
     \subsubsection{Acheter joueur}
       \begin{itemize}
         \item \textbf{Relations avec d'autres cas d'utilisation}  : Spécialise Faire des achats
-        \item \textbf{Pré-conditions} : Le client a encore de la place pour un joueur dans son équipe.
-        \item \textbf{Post-conditions} : Néant.
-        \item \textbf{Cas général} : Le client choisit le joueur qu’il veut acheter selon les capacités de ce dernier (ce qui l’intéresse), et selon le prix de ce joueur. Les joueurs achetés sont équipés d'un balai médiocre qui n'a pas de valeur financière.
-        \item \textbf{Cas exceptionnels} : Néant.
+        \item \textbf{Pré-conditions} : Le Manager s'est manifesté en sélectionnant le joueur qui l'intéresse dans la liste des joueurs mis en vente.
+        \item \textbf{Post-conditions} : S'il est le seul enchérisseur, le Manager remporte l'enchère. S'ils sont plusieurs à enchérir, le Manager peut participer au tour suivant. Si personne n'enchérit au tour suivant et que le Manager était le dernier enchérisseur du tour courant, il remporte l'enchère. Sinon, le Manager n'a pas remporté l'enchère.
+        \item \textbf{Cas général} : Le client choisit le joueur qu’il veut acheter selon les capacités de ce dernier (ce qui l’intéresse), et selon le prix de ce joueur. Les joueurs achetés sont équipés d'un balai médiocre qui n'a pas de valeur financière. Les enchères se déroulent par tours. Le Manager manifeste son intérêt en se signalant au premier tour. Il assure ainsi sa participation au tour suivant. Si le prix du joueur devient trop élevé à son goût, le Manager peut abandonner en ne renouvellant pas son enchère lors d'un tour, ce qui lui interdira de surenchérir lors du tour suivant.
+        \item \textbf{Cas exceptionnels} :
+        \begin{itemize}
+            \item Personne ne se manifeste au premier tour. La vente est annulée, le joueur retourne en la possession du vendeur.
+            \item Un Manager souhaite surenchérir alors que le prix, augmenté de son enchère, est au-dessus de ses moyens. Le programme le lui signale et son offre n'est pas prise en compte.
+            \item Un Manager désire surenchérir alors qu'il n'a pas émis d'enchère au tour précédant. Le programme le lui signale et ne considère pas son offre.
+          \end{itemize}
       \end{itemize}
     \subsubsection{Acheter balai}
       \begin{itemize}
@@ -471,21 +487,25 @@
     \subsubsection{Vendre joueur}
       \begin{itemize}
         \item \textbf{Relations avec d'autres cas d'utilisation}  : Spécialise Faire des ventes
-        \item \textbf{Pré-conditions} : Le joueur que le client souhaite vendre doit être disponible (pas bloqué par une blessure, un entraînement ou une tournée de promotion).
+        \item \textbf{Pré-conditions} : Néant.
         \item \textbf{Post-conditions} : Néant.
-        \item \textbf{Cas général} : Le client choisit le joueur qu’il veut vendre. Le joueur ne sera plus dans l’équipe mais sera disponible à l’achat. Le client peut vendre un joueur équipé d’un balai, ce qui augmente un peu la valeur du joueur.
-        \item \textbf{Cas exceptionnels} : Néant.
-          \begin{itemize}
+        \item \textbf{Cas général} : Le client choisit le joueur qu’il veut vendre et à quel prix (entre des bornes supérieure et inférieure imposées). Le joueur ne sera plus dans l’équipe mais sera disponible à l’achat. Le client peut vendre aux enchères un joueur équipé d’un balai, ce qui augmente un peu la valeur du joueur.
+        \item \textbf{Cas exceptionnels} : 
+        \begin{itemize}
+            \item Le joueur n'a pas trouvé d'acheteur. Il reste dans l'équipe du Manager/vendeur.
             \item Le client n’a que 7 joueurs dans son équipe et en vend un. Il ne lui reste pas suffisamment de joueurs pour avoir une équipe complète, il recevra donc un joueur médiocre avec des attributs et un balai de base.
           \end{itemize}
       \end{itemize}
     \subsubsection{Vendre balai}
       \begin{itemize}
         \item \textbf{Relations avec d'autres cas d'utilisation}  : Spécialise Faire des ventes
-        \item \textbf{Pré-conditions} : Le balai doit être disponible, c’est-à-dire qu’il ne doit pas être assigné à un joueur.
-        \item \textbf{Post-conditions} : Le balai ne sera plus dans l’inventaire de balais du client, mais sera disponible à l’achat.
+        \item \textbf{Pré-conditions} : Néant.
+        \item \textbf{Post-conditions} : Néant.
         \item \textbf{Cas général} : Le client désire vendre un balai.
-        \item \textbf{Cas exceptionnels} : Néant.
+        \item \textbf{Cas exceptionnels} : 
+        \begin{itemize}
+            \item Le Manager se débarrasse de ses balais de base lorsqu'il n'en a plus besoin. Cette vente ne lui rapporte rien.
+          \end{itemize}
       \end{itemize}
 
   \subsection{Cas d'utilisation 6: améliorer ses joueurs}
@@ -502,11 +522,14 @@
     \subsubsection{Faire de la publicité}
       \begin{itemize}
         \item \textbf{Relations avec d'autres cas d'utilisation}  : Inclut Sélectionner joueur
-        \item \textbf{Pré-conditions} : Le client dispose de suffisamment d’argent pour payer la publicité.
+        \item \textbf{Pré-conditions} : Le Manager dispose de suffisamment d’argent pour payer la publicité.
         \item \textbf{Post-conditions} : Le joueur est bloqué jusqu'à une certaine date sauvegardée dans un calendrier. Ce calendrier sera vérifié régulièrement.
-        \item \textbf{Cas général} : Le client souhaite augmenter la popularité d'un joueur. Ceci est possible grâce au bâtiment \enquote{Agence de publicité}\index{bâtiment!Agence de publicité} dont le niveau détermine la durée. En payant une certaine somme, le client peut donc augmenter la popularité du joueur choisi. Le joueur est indisponible jusqu’à la fin de la publicité.
+        \item \textbf{Cas général} : Le Manager souhaite augmenter la popularité d'un joueur. Ceci est possible grâce au bâtiment \enquote{Agence de publicité}\index{bâtiment!Agence de publicité} dont le niveau détermine la durée. En payant une certaine somme, le client peut donc augmenter la popularité du joueur choisi. Le joueur est indisponible jusqu’à la fin de la publicité.
 
-        \item \textbf{Cas exceptionnels} : Néant.
+        \item \textbf{Cas exceptionnels} :
+        \begin{itemize}
+            \item Le Manager n'a pas les moyens de payer la publicité. Le programme le lui signale et l'action est annulée.
+          \end{itemize}
       \end{itemize}
     \subsubsection{Entraîner joueur}
       \begin{itemize}
@@ -514,23 +537,32 @@
         \item \textbf{Pré-conditions} : Le client dispose de suffisamment d’argent pour payer l’entraînement.
         \item \textbf{Post-conditions} : Le joueur est bloqué jusqu'à une certaine date sauvegardée dans un calendrier. Ce calendrier sera vérifié régulièrement.
         \item \textbf{Cas général} : Le client souhaite augmenter un attribut  d’un joueur. Le niveau du bâtiment concerné par cette action détermine la durée d'indisponibilité du joueur. En payant une certaine somme, le client peut donc augmenter une caractéristique du joueur choisi. En attendant la fin de l’entraînement, le joueur est donc indisponible.
-        \item \textbf{Cas exceptionnels} : Néant.
+        \item \textbf{Cas exceptionnels} :
+        \begin{itemize}
+            \item Le Manager n'a pas les moyens de payer la séance d'entraînement. Le programme le lui signale et l'action est annulée.
+          \end{itemize}
       \end{itemize}
     \subsubsection{Sélectionner joueur}
       \begin{itemize}
         \item \textbf{Relations avec d'autres cas d'utilisation}  : Est inclus dans Faire de la publicité et Entraîner joueur
-        \item \textbf{Pré-conditions} : Le joueur sélectionné doit être disponible ; c’est-à-dire qu’il ne doit pas être blessé (car il est en pris en charge par l'infirmerie), ni en train de faire un autre entraînement ou en campagne de promotion.
+        \item \textbf{Pré-conditions} : Le joueur sélectionné doit être disponible ; c’est-à-dire qu’il ne peut être blessé (car il se trouverait alors à l'infirmerie), ni en train de faire un autre entraînement ou parti en campagne de promotion.
         \item \textbf{Post-conditions} : Le joueur sur lequel on va faire l’amélioration sera indisponible jusqu’à la fin de l’entraînement ou de la publicité.
-        \item \textbf{Cas général} : Le client choisit de quel joueur il veut augmenter un attribut ou la popularité. 
-        \item \textbf{Cas exceptionnels} : Néant.
+        \item \textbf{Cas général} : Le Manager choisit de quel joueur il veut augmenter un attribut ou la popularité. 
+        \item \textbf{Cas exceptionnels} : 
+        \begin{itemize}
+            \item Le joueur que le Manager désire sélectionner est momentanément indisponible (car en pleine séance d'entraînement, en campagne de promotion où est soigné à l'infirmerie). Le programme le lui signale et l'action est annulée.
+          \end{itemize}
       \end{itemize}
     \subsubsection{Choisir attribut à entraîner}
       \begin{itemize}
         \item \textbf{Relations avec d'autres cas d'utilisation}  : Est inclus dans Entraîner joueur
-        \item \textbf{Pré-conditions} : Néant.
-        \item \textbf{Post-conditions} : Néant.
+        \item \textbf{Pré-conditions} : Le Manager a sélectionné un joueur et a décidé de l'entraîner.
+        \item \textbf{Post-conditions} : L'attribut choisi sera augmenté lorsque la séance d'entraînement aura pris fin.
         \item \textbf{Cas général} : Le client choisit quel attribut il souhaite augmenter. Il ne peut entraîner qu’un attribut à la fois. 
-        \item \textbf{Cas exceptionnels} : Néant.
+        \item \textbf{Cas exceptionnels} :
+        \begin{itemize}
+            \item L'attribut choisi est déjà à son maximum. Le programme le lui signale et l'action est annulée.
+          \end{itemize}
       \end{itemize}
 
   \subsection{Cas d'utilisation 7: le stade}
@@ -544,11 +576,11 @@
       \begin{itemize}
         \item \textbf{Relations avec d'autres cas d'utilisation}  : Inclut Choisir la composition d’équipe
         \item \textbf{Pré-conditions} : C’est un jour de match et l’adversaire est également connecté.
-        \item \textbf{Post-conditions} : Néant.
-        \item \textbf{Cas général} : Pour savoir si c'est un jour de match, on vérifie en checkant le \gls{calendrier} \index{calendrier} des matches. S'il y a bien un match de prévu, le client est connecté en même temps que son adversaire du jour. Ils doivent donc jouer le match dont la date a été prédéterminée.
+        \item \textbf{Post-conditions} : Il y a un gagnant et un perdant.
+        \item \textbf{Cas général} : Pour savoir si c'est un jour de match, on vérifie en checkant le \gls{calendrier} \index{calendrier} des matches. S'il y a bien un match de prévu, le Manager est connecté en même temps que son adversaire du jour. Ils doivent donc jouer le match dont la date a été prédéterminée.
         \item \textbf{Cas exceptionnels} : 
           \begin{itemize}
-            \item L’adversaire ne se connecte jamais. Le client jouera contre l’équipe de son adversaire qui suivra une stratégie automatique minimaliste.
+            \item L’adversaire ne se connecte jamais. Le Manager jouera contre l’équipe de son adversaire qui suivra une stratégie automatique minimaliste (Intelligence Artificielle).
           \end{itemize}
       \end{itemize}
     \subsubsection{Choisir la composition d'équipe}
@@ -557,7 +589,10 @@
         \item \textbf{Pré-conditions} : Les joueurs choisis doivent être disponibles et être équipés d’un balai.
         \item \textbf{Post-conditions} : Néant.
         \item \textbf{Cas général} : Le client choisit les 7 \index{joueur}joueurs qui seront sur le \index{terrain}terrain pour le match qu’il doit jouer.
-        \item \textbf{Cas exceptionnels} : Néant.
+        \item \textbf{Cas exceptionnels} : 
+        \begin{itemize}
+            \item Le Manager n'en choisi aucun. 7 joueurs sont alors sélectionnés aléatoirement.
+          \end{itemize}
       \end{itemize}
     \subsubsection{Avoir le résultat du match}
       \begin{itemize}
@@ -573,13 +608,13 @@
   Pour le confort de l'utilisateur, il faudra  une interface graphique très intuitive, 
   les menus étant attachés à des  bâtiments, leur sélection par la souris ouvrira ces menus.
   De même, la gestion d'un match devra être aisée, malgré le nombre d'actions à choisir 
-  sur un tour. Le plaisir de l'utilisateur dépendra du rythme de la succession de ces tours.
+  sur un tour. Le plaisir de l'utilisateur apporté par le jeu dépendra du rythme de la succession de ces tours.
 \section{Exigences de domaine}
   L'expérience immersive de l'utilisateur doit être connectée à l'univers fixé, 
   à savoir la saga d'Harry Potter. Cela signifie, d'une part, 
   qu'il ne faut pas contrevenir aux droits d'auteur portant sur les oeuvres 
   qui décrivent cet univers, et d'autre part, qu'il faut y ressembler suffisament pour que 
-  l'utilisateur qui connait l'oeuvre y retrouve les éléments composant cet univers.
+  l'utilisateur, familier de ce même univers, y retrouve les éléments le composant.
 \chapter{Besoins du système}
   % Cette troisième section décrit en détail les fonctionnalités du
   % système (à partir de celles décrites à la section précédente), sans
